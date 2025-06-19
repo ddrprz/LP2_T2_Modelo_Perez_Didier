@@ -1,0 +1,98 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<title>Ejemplos Prof. Ernesto Arbulú</title>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+		crossorigin="anonymous" />
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+
+<body>
+	<div class="container mt-4">
+		<div class="card shadow-lg">
+			<div class="card-body">
+				<h1 class="text-center">Edición de Inventario</h1>
+				<div class="row d-flex justify-content-center">
+					<div class="col-md-6">
+						<form th:action="@{/inventarios/guardar}" method="post" th:object="${inventario}">
+
+							<!-- Campo oculto para número de inventario -->
+							<input type="hidden" th:field="*{numero}" />
+
+							<div class="mb-3">
+								<label for="inputFecha">Fecha de Vencimiento</label>
+								<input type="date" class="form-control" id="inputFecha" th:field="*{fechaVencimiento}" required>
+							</div>
+
+							<div class="mb-3">
+								<label for="inputCategoria">Categoría</label>
+								<select id="inputCategoria" class="form-select" th:field="*{producto.categoria}" required>
+									<option value="">--Seleccione--</option>
+									<option th:each="cat : ${categorias}" th:value="${cat}" 
+										th:selected="${cat.id} == ${inventario.producto.categoria.id}"
+										th:text="${cat.descripcion}">
+									</option>
+								</select>
+							</div>
+
+							<div class="mb-3">
+								<label for="inputProducto">Producto</label>
+								<select id="inputProducto" class="form-select" th:field="*{producto}" required>
+									<option value="">--Seleccione--</option>
+									<option th:each="prod : ${productos}" th:value="${prod}" 
+										th:selected="${prod.id} == ${inventario.producto.id}"
+										th:text="${prod.nombre}">
+									</option>
+								</select>
+							</div>
+
+							<div class="mb-3">
+								<label for="inputCosto">Costo de Ingreso</label>
+								<input type="number" step="0.01" min="0" class="form-control" id="inputCosto" th:field="*{costoIngreso}" required>
+							</div>
+
+							<div class="mb-3">
+								<label for="inputCantidad">Cantidad</label>
+								<input type="number" min="1" class="form-control" id="inputCantidad" th:field="*{cantidad}" required>
+							</div>
+
+							<div class="mb-3">
+								<label for="inputLote">Lote</label>
+								<input type="text" class="form-control" id="inputLote" th:field="*{lote}" placeholder="Ej. L001-A">
+							</div>
+
+							<div class="mb-3">
+								<label for="inputEstado">Estado</label>
+								<select id="inputEstado" class="form-select" th:field="*{codEstado}" required>
+									<option value="">--Seleccione--</option>
+									<option value="A" th:selected="*{codEstado == 'A'}">Activo</option>
+									<option value="V" th:selected="*{codEstado == 'V'}">Vencido</option>
+									<option value="T" th:selected="*{codEstado == 'T'}">En tránsito</option>
+									<option value="B" th:selected="*{codEstado == 'B'}">Bloqueado</option>
+								</select>
+							</div>
+
+							<button type="reset" class="btn btn-outline-secondary">Limpiar
+								<i class="fa-solid fa-eraser"></i>
+							</button>
+							<button type="submit" class="btn btn-primary">Guardar
+								<i class="fa-solid fa-floppy-disk"></i>
+							</button>
+							<a th:href="@{/inventarios/listado}" class="btn btn-dark">Regresar
+								<i class="fa-solid fa-arrow-right-from-bracket"></i>
+							</a>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
