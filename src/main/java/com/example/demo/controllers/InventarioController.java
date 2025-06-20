@@ -42,7 +42,7 @@ public class InventarioController {
 	public String nuevo(Model model) {
 		model.addAttribute("inventario", new Inventario());
 		model.addAttribute("productos", productoRepo.findAll());
-		model.addAttribute("categorias", categoriaRepo.findAll()); // Importante si la vista lo usa
+		model.addAttribute("categorias", categoriaRepo.findAll()); 
 		return "inventarios/nuevoPrimerApellido";
 	}
 
@@ -50,7 +50,7 @@ public class InventarioController {
 	public String editarInventario(@PathVariable("id") Integer id, Model model) {
 		Optional<Inventario> opt = inventarioRepo.findById(id);
 		if (opt.isEmpty()) {
-			return "redirect:/inventarios/listado"; // O una página de error
+			return "redirect:/inventarios/listado"; 
 		}
 
 		model.addAttribute("inventario", opt.get());

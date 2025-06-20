@@ -22,17 +22,14 @@
                     <div class="col-md-6">
                         <form th:action="@{/inventarios/guardar}" method="post" th:object="${inventario}">
 
-                            <!-- Campo oculto para edición -->
                             <input type="hidden" th:if="*{numero != null}" th:field="*{numero}" />
 
-                            <!-- Fecha de vencimiento -->
                             <div class="mb-3">
                                 <label for="fechaVencimiento">Fecha de Vencimiento</label>
                                 <input type="date" class="form-control" id="fechaVencimiento"
                                     th:field="*{fechaVencimiento}" required>
                             </div>
 
-                            <!-- Producto (select) -->
                             <div class="mb-3">
                                 <label for="producto">Producto</label>
                                 <select id="producto" class="form-select" th:field="*{producto.id}" required>
@@ -42,28 +39,24 @@
                                 </select>
                             </div>
 
-                            <!-- Costo de ingreso -->
                             <div class="mb-3">
                                 <label for="costoIngreso">Costo de Ingreso (S/.)</label>
                                 <input type="number" step="0.01" min="0" class="form-control" id="costoIngreso"
                                     placeholder="0.00" th:field="*{costoIngreso}" required>
                             </div>
 
-                            <!-- Cantidad -->
                             <div class="mb-3">
                                 <label for="cantidad">Cantidad</label>
                                 <input type="number" class="form-control" id="cantidad" placeholder="1"
                                     th:field="*{cantidad}" required>
                             </div>
 
-                            <!-- Lote -->
                             <div class="mb-3">
                                 <label for="lote">Lote</label>
                                 <input type="text" class="form-control" id="lote" th:field="*{lote}"
                                     placeholder="Ej. L001-A">
                             </div>
 
-                            <!-- Estado -->
                             <div class="mb-3">
                                 <label for="codEstado">Estado</label>
                                 <select id="codEstado" class="form-select" th:field="*{codEstado}" required>
@@ -75,7 +68,6 @@
                                 </select>
                             </div>
 
-                            <!-- Botones -->
                             <div class="d-flex justify-content-between">
                                 <button type="reset" class="btn btn-outline-secondary">
                                     Limpiar <i class="fa-solid fa-eraser"></i>
